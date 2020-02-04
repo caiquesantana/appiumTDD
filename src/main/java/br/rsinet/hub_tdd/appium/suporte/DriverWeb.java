@@ -13,22 +13,20 @@ import io.appium.java_client.android.AndroidDriver;
 public class DriverWeb {
 	private static DesiredCapabilities capabilities;
 
-    private static AndroidDriver<WebElement> driver;
-   
+	private static AndroidDriver<WebElement> driver;
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static AndroidDriver creatDriver() throws MalformedURLException {
 		if (driver == null) {
 
-			 capabilities = new DesiredCapabilities();
-			 //capabilities.setCapability(CapabilityType.BROWSER_NAME, "");
-			 capabilities.setCapability("deviceName", "AOSP on IA Emulator");
-			 capabilities.setCapability("platformVersion", "9.0");
-			 capabilities.setCapability("platformName", "Android");
-			 capabilities.setCapability("appPackage", "com.Advantage.aShopping");
-			 capabilities.setCapability("appActivity", "com.Advantage.aShopping.SplashActivity");
-			 
-			 driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
-			 driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS);
+			capabilities = new DesiredCapabilities();
+			capabilities.setCapability("deviceName", "AOSP on IA Emulator");
+			capabilities.setCapability("platformVersion", "9.0");
+			capabilities.setCapability("platformName", "Android");
+			capabilities.setCapability("appPackage", "com.Advantage.aShopping");
+			capabilities.setCapability("appActivity", "com.Advantage.aShopping.SplashActivity");
+			driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+			driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS);
 		}
 		return driver;
 
