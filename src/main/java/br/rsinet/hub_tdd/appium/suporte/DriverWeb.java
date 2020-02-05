@@ -25,8 +25,10 @@ public class DriverWeb {
 			capabilities.setCapability("platformName", "Android");
 			capabilities.setCapability("appPackage", "com.Advantage.aShopping");
 			capabilities.setCapability("appActivity", "com.Advantage.aShopping.SplashActivity");
+			capabilities.setCapability("unicodeKeyboard", true);
+			capabilities.setCapability("resetKeyBoard", true);
 			driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
-			driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		}
 		return driver;
 
