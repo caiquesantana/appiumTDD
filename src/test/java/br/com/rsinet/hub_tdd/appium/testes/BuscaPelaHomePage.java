@@ -33,12 +33,18 @@ public class BuscaPelaHomePage {
 	@Test
 	public void TesteHomePageFalha() {
 		PesquisaPelaHome pesquisa = new PesquisaPelaHome(driver);
+		pesquisa.categoriaLaptop().produtoSelecionado().addCarrinho();
+		WebElement quantidade = driver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout[2]/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.EditText"));
+		quantidade.sendKeys("20");
+		pesquisa.confirmarCompra().credenciais();
+		String qtdCarrinho = driver.findElement(By.id("com.Advantage.aShopping:id/textViewCartLength")).getText();
+		Assert.assertFalse(qtdCarrinho.equals(quantidade));
 		
 	}
 	
 	@After
 	public void afterM() {
-		//DriverWeb.fecharDriver();
+		DriverWeb.fecharDriver();
 
 	}
 }

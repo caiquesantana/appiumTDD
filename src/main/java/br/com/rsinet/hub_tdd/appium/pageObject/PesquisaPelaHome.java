@@ -18,22 +18,28 @@ public class PesquisaPelaHome {
 		driver.findElement(By.xpath("//android.widget.RelativeLayout[@content-desc=\"Laptops\"]/android.widget.LinearLayout/android.widget.GridView/android.widget.RelativeLayout[1]/android.widget.TextView[1]")).click();
 		return this;
 	}
-//	public PesquisaPelaHome quantidade () {
-//		WebElement qtd = driver.findElement(By.id("com.Advantage.aShopping:id/textViewProductQuantity"));
-//		qtd.click();
-//		driver.findElement(By.id("com.Advantage.aShopping:id/textViewProductQuantity")).click();
-//		qtd.sendKeys("11");
+	public PesquisaPelaHome addCarrinho () {
+		driver.findElement(By.id("com.Advantage.aShopping:id/textViewProductQuantity")).click();
+		//driver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout[2]/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.EditText"))
+		//					.sendKeys("20");
 //		driver.findElement(By.id("com.Advantage.aShopping:id/textViewApply")).click();
 //		driver.findElement(By.id("com.Advantage.aShopping:id/buttonProductAddToCart")).click();
-//		return this;
-//	}
-//	public PesquisaPelaHome credenciais () {
-//		//credenciais necessaria para add ao carrinho
-//		driver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout[2]/android.widget.RelativeLayout[3]/android.widget.EditText")).sendKeys("cauasantana");
-//		driver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout[2]/android.widget.RelativeLayout[4]/android.widget.EditText")).sendKeys("Caique1");
-//		driver.findElement(By.id("com.Advantage.aShopping:id/buttonLogin")).click();
-//		return this;
-//	}
+		return this;
+	}
+	public PesquisaPelaHome confirmarCompra () {
+		driver.findElement(By.id("com.Advantage.aShopping:id/textViewApply")).click();
+		driver.findElement(By.id("com.Advantage.aShopping:id/buttonProductAddToCart")).click();
+		return this;
+		
+	}
+	
+	public PesquisaPelaHome credenciais () {
+		//credenciais necessaria para add ao carrinho
+		driver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout[2]/android.widget.RelativeLayout[3]/android.widget.EditText")).sendKeys("cauasantana");
+		driver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout[2]/android.widget.RelativeLayout[4]/android.widget.EditText")).sendKeys("Caique1");
+		driver.findElement(By.id("com.Advantage.aShopping:id/buttonLogin")).click();
+		return this;
+	}
 	
 }
 
