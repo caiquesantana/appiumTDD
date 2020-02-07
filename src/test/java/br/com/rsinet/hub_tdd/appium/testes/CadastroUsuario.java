@@ -14,6 +14,7 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterTest;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -22,7 +23,7 @@ import br.com.rsinet.hub_tdd.appium.pageObject.CadastroUsuarioPage;
 import br.com.rsinet.hub_tdd.appium.pageObject.LoginPage;
 import br.com.rsinet.hub_tdd.appium.pageObject.PesquisaPelaHome;
 import br.rsinet.hub_tdd.appium.suporte.DriverWeb;
-import br.rsinet.hub_tdd.appium.suporte.ExtendReport;
+import br.rsinet.hub_tdd.appium.suporte.ExtentReport;
 
 @RunWith(DataDrivenTestRunner.class)
 @DataLoader(filePaths = "CadastroUsuario.csv")
@@ -37,7 +38,7 @@ public class CadastroUsuario {
     
     @BeforeClass
     public static void test() {
-        test = ExtendReport.setExtent("ReportDeCadastroDeUsuario");
+        test = ExtentReport.setExtent("CadastroUsuario");
     }
 
 	@Before
@@ -59,7 +60,7 @@ public class CadastroUsuario {
 			@Param(name = "rua") String rua,
 			@Param(name = "cidade") String cidade,
 			@Param(name = "cep") String cep) throws InterruptedException, IOException {
-		report = ExtendReport.createTest("CadastroUsuarioSucesso");
+		report = ExtentReport.createTest("CadastroUsuarioSucesso");
 		CadastroUsuarioPage cadastro = new CadastroUsuarioPage(driver);
 		
 		cadastro.cadastro()
@@ -80,7 +81,7 @@ public class CadastroUsuario {
 		driver.findElement(By.id("com.Advantage.aShopping:id/imageViewMenu")).click();
 		String usuarioLogado = driver.findElement(By.id("com.Advantage.aShopping:id/textViewMenuUser")).getText();
 		Assert.assertTrue(usuarioLogado.equals(login));
-		ExtendReport.statusReported(report, driver, teste);
+		ExtentReport.statusReported(report, driver, teste);
 		teste = "CadastroUsuarioSucesso";
 	}
 
@@ -97,7 +98,7 @@ public class CadastroUsuario {
 			@Param(name = "rua") String rua,
 			@Param(name = "cidade") String cidade,
 			@Param(name = "cep") String cep) throws InterruptedException, IOException {
-		report = ExtendReport.createTest("CadastroUsuarioFalha");
+		report = ExtentReport.createTest("CadastroUsuarioFalha");
 		CadastroUsuarioPage cadastro = new CadastroUsuarioPage(driver);
 		cadastro.cadastro()
 		.digitarLogin(login)
@@ -120,14 +121,18 @@ public class CadastroUsuario {
 				.click();
 		String usuarioLogado = driver.findElement(By.id("com.Advantage.aShopping:id/textViewMenuUser")).getText();
 		Assert.assertFalse(usuarioLogado.equals(login));
-		ExtendReport.statusReported(report, driver, teste);
+		ExtentReport.statusReported(report, driver, teste);
 		teste = "CadastroUsuarioFalha";
 	}
 
 	@After
-	public void afterM() {
-		ExtendReport.quitExtent(test);
+	public void afterMethod() {
 		DriverWeb.fecharDriver();
+	}
+	@AfterTest
+	public void afterM() {
+		ExtentReport.quitExtent(test);
+
 	}
 
 }

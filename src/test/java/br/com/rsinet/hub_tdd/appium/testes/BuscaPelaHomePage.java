@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.annotations.AfterTest;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -18,7 +19,7 @@ import com.aventstack.extentreports.ExtentTest;
 import br.com.rsinet.hub_tdd.appium.pageObject.LoginPage;
 import br.com.rsinet.hub_tdd.appium.pageObject.PesquisaPelaHome;
 import br.rsinet.hub_tdd.appium.suporte.DriverWeb;
-import br.rsinet.hub_tdd.appium.suporte.ExtendReport;
+import br.rsinet.hub_tdd.appium.suporte.ExtentReport;
 import br.rsinet.hub_tdd.appium.suporte.Screenshot;
 
 public class BuscaPelaHomePage {
@@ -31,7 +32,7 @@ public class BuscaPelaHomePage {
 	
     @BeforeClass
     public static void test() {
-        test = ExtendReport.setExtent("ReportDeBuscaPaginaInicial");
+        test = ExtentReport.setExtent("PesquisaPaginaInicial");
     }
     
 	@Before
@@ -41,12 +42,12 @@ public class BuscaPelaHomePage {
 	
 	@Test
 	public void TesteHomePageSucesso() throws IOException {
-		report = ExtendReport.createTest("TesteHomePageSucesso");
+		report = ExtentReport.createTest("TesteHomePageSucesso");
 		pesquisa = new PesquisaPelaHome(driver);
 		pesquisa.categoriaLaptop().produtoSelecionado();
 		String nomeProduto = driver.findElement(By.id("com.Advantage.aShopping:id/textViewProductName")).getText();
 		Assert.assertTrue(nomeProduto.equals("HP CHROMEBOOK 14 G1(ENERGY STAR)"));
-		ExtendReport.statusReported(report, driver, teste);
+		ExtentReport.statusReported(report, driver, teste);
 		teste = "TesteHomePageSucesso";
 		
 	}
@@ -54,13 +55,12 @@ public class BuscaPelaHomePage {
 	@SuppressWarnings("unlikely-arg-type")
 	@Test
 	public void TesteHomePageFalha() throws IOException {
-	    report = ExtendReport.createTest("TesteHomePageFalha"); 
+	    report = ExtentReport.createTest("TesteHomePageFalha"); 
 	    
 		pesquisa = new PesquisaPelaHome(driver);
 		logar = new LoginPage(driver);
 		
 		logar.homePage().usuario("cauasantana").password("Caique1").entrar();
-		
 		pesquisa.categoriaLaptop().produtoSelecionado().addCarrinho();
 		WebElement quantidade = driver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout[2]/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.EditText"));
 		quantidade.click();
@@ -68,14 +68,17 @@ public class BuscaPelaHomePage {
 		pesquisa.confirmarCompra();
 		String qtdCarrinho = driver.findElement(By.id("com.Advantage.aShopping:id/textViewCartLength")).getText();
 		Assert.assertFalse(qtdCarrinho.equals(quantidade));
-		ExtendReport.statusReported(report, driver, teste);
+		ExtentReport.statusReported(report, driver, teste);
 		teste = "TesteHomePageFalha";
 		
 	}
 	@After
+	public void afterMethod () {
+		DriverWeb.fecharDriver();
+	}
+	@AfterTest
 	public void afterM() {
-		ExtendReport.quitExtent(test);
-	DriverWeb.fecharDriver();
+		ExtentReport.quitExtent(test);
 
 	}
 }

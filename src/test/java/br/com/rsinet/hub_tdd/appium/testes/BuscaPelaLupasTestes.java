@@ -10,6 +10,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterTest;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -18,7 +19,7 @@ import br.com.rsinet.hub_tdd.appium.pageObject.BuscaLupaPage;
 import br.com.rsinet.hub_tdd.appium.pageObject.LoginPage;
 import br.com.rsinet.hub_tdd.appium.pageObject.PesquisaPelaHome;
 import br.rsinet.hub_tdd.appium.suporte.DriverWeb;
-import br.rsinet.hub_tdd.appium.suporte.ExtendReport;
+import br.rsinet.hub_tdd.appium.suporte.ExtentReport;
 
 public class BuscaPelaLupasTestes {
 	private WebDriver driver;
@@ -30,7 +31,7 @@ public class BuscaPelaLupasTestes {
     
     @BeforeClass
     public static void test() {
-        test = ExtendReport.setExtent("ReportDeBuscaPelaLupaTestes");
+        test = ExtentReport.setExtent("PesquisaPelaLupa");
     }
 	
 	@Before
@@ -41,7 +42,7 @@ public class BuscaPelaLupasTestes {
 	
 	@Test
 	public void TesteLupaSucesso() throws IOException {
-		report = ExtendReport.createTest("TesteLupaSucesso");
+		report = ExtentReport.createTest("TesteLupaSucesso");
 		BuscaLupaPage lupa = new BuscaLupaPage(driver);
 		lupa.clicarLupa()
 			.campoDePesquisa("HP CHROMEBOOK 14 G1(ENERGY")
@@ -50,13 +51,13 @@ public class BuscaPelaLupasTestes {
 		
 	String nomeProduto = driver.findElement(By.id("com.Advantage.aShopping:id/textViewProductName")).getText();
 	Assert.assertTrue(nomeProduto.equals("HP CHROMEBOOK 14 G1(ENERGY STAR)"));
-	ExtendReport.statusReported(report, driver, teste);
+	ExtentReport.statusReported(report, driver, teste);
 	teste = "TesteLupaSucesso";
 	}
 	
 	@Test
 	public void TesteLupaFalha() throws IOException {
-		report = ExtendReport.createTest("TesteLupaFalha");
+		report = ExtentReport.createTest("TesteLupaFalha");
 		BuscaLupaPage lupa = new BuscaLupaPage(driver);
 		lupa.clicarLupa()
 			.campoDePesquisa("iphone")
@@ -64,14 +65,16 @@ public class BuscaPelaLupasTestes {
 	String produtoPesquisado = driver.findElement(By.id("com.Advantage.aShopping:id/textViewNoProductsToShow")).getText();
 	
 	Assert.assertEquals("- No results for \"iphone\" -", produtoPesquisado);
-	ExtendReport.statusReported(report, driver, teste);
+	ExtentReport.statusReported(report, driver, teste);
 	teste = "TesteLupaFalha";
 	}
 	
 	@After
-	public void afterM() {
-		ExtendReport.quitExtent(test);
+	public void afterMethod() {
 		DriverWeb.fecharDriver();
-		
+	}
+	@AfterTest
+	public void afterM() {
+		ExtentReport.quitExtent(test);
 	}
 }
