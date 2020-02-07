@@ -1,4 +1,5 @@
 CadastroUsuarioSucesso,login, email, senha, confirmarSenha, nome, sobrenome, contato, pais, estado, rua, cidade, cep
-					  ,abcqfls,test@email.com,Caique1,Caique1,caique,santana, 119827393,Brazil,São Paulo, rua 1, osasco,098493-079
+					  ,oldkes,test@email.com,Caique1,Caique1,caique,santana, 119827393,Brazil,São Paulo, rua 1, osasco,098493-079
+					  ,pqoel7,test@email.com,Caique1,Caique1,caique,santana, 119827393,Brazil,São Paulo, rua 1, osasco,098493-079
 CadastroUsuarioFalha, login, email, senha, confirmarSenha, nome, sobrenome, contato, pais, estado, rua, cidade, cep				  
 					, mfkqfls,test@email.com,Caique1,Caique1,caique,santana, 119827393,Brazil,São Paulo, rua 1, osasco,098493-079

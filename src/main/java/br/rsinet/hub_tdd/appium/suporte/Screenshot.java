@@ -12,13 +12,20 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
 public class Screenshot {
-    public static void tirar(WebDriver driver, String arquivo) throws IOException {
-        File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        File destino = new File ("./relatorios/cadastropossitivo" + arquivo + DataHora ()+".png" );
-        FileUtils.copyFile(screenshot, destino);
-        driver.manage().timeouts().implicitlyWait(02, TimeUnit.SECONDS);
-        }
-    public static String DataHora () {
-    	return new SimpleDateFormat("yyyy-MM-dd HH-mm-ss").format(new Date());
-    }
-}
+	public static String getScreenshot(WebDriver driver, String screenshotName) throws IOException {
+	        String dateName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+	        TakesScreenshot ts = (TakesScreenshot) driver;
+	        File source = ts.getScreenshotAs(OutputType.FILE);
+
+
+	        String destination = System.getProperty("user.dir") + "./Screenshots/" + screenshotName + dateName + ".png";
+	        File finalDestination = new File(destination);
+	        FileUtils.copyFile(source, finalDestination);
+	        return destination;
+	    }
+	}
+	 
+
+
+
+
